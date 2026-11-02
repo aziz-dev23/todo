@@ -1,0 +1,24 @@
+version: "v5.6.1"
+
+
+services:
+  db:
+    image: postgres:alpine
+    container_name: notes_db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1
+    volumes:
+      - pg_data:/var/lib/postgresql
+  notes_bot:
+    build: 5_modul
+    image: notes_image:alpine
+    container_name: notes_con
+    restart: always
+    command:
+      - python3 main.py
+    depends_on:
+      - db
+
+volumes:
+  pg_data:
