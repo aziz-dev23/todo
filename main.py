@@ -44,7 +44,7 @@ class NoteForm(StatesGroup):
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
     query = select(User).where(User.id == message.from_user.id)
-    data = session.execute(engine).scalar()
+    data = session.execute(query).scalar()
     if not data:
         query = insert(User).values(id=message.from_user.id, first_name= message.from_user.first_name)
         session.execute(query)

@@ -1,6 +1,6 @@
 from os import getenv
 
-from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, BigInteger
 from sqlalchemy.orm import declarative_base, sessionmaker, Mapped, mapped_column, relationships, relationship
 from dotenv import load_dotenv
 
@@ -21,7 +21,7 @@ Base = declarative_base()
 # Modelni qurish
 class User(Base):
      __tablename__ = "users"
-     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=False)
+     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=False)
      first_name: Mapped[str] = mapped_column(String(30))
      notes: Mapped[list['Note']] = relationship(back_populates="user")
 
